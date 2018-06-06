@@ -1,7 +1,8 @@
 import json
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-zeus_bot = Updater('511574247:AAH3erAoX0XlV7R0cuVMxx_pbI_vbE2DtU8')
+BOT_API_TOKEN = ''
+zeus_bot = Updater(BOT_API_TOKEN)
 
 def watchMessages(bot, update):
     group_name = update.message.chat.username

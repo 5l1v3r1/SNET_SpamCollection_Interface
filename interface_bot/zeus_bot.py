@@ -2,16 +2,17 @@ import json
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import httplib2
 
-BOT_API_TOKEN = ''
+BOT_API_TOKEN = '511574247:AAGE5ggP69zGHwCHF1Y6cOp4LS3LrBkZYLY'
 zeus_bot = Updater(BOT_API_TOKEN)
-API_ENDPOINT_URL = ''
+API_ENDPOINT_URL = 'http://localhost:8000/api/'
 
 def watchMessages(bot, update):
     group_name = update.message.chat.username
     username = update.message.from_user.username 
     text_content = update.message.text
-    json_dir = {"group_name": group_name, "username": username, "chat": text_content}
+    json_dir = {"group_name": group_name, "username": username, "text_content": text_content}
     json_obj = json.dumps(json_dir)
+    print(json_obj)
     http = httplib2.Http()
     resp, content = http.request(
         uri=API_ENDPOINT_URL,
@@ -19,7 +20,8 @@ def watchMessages(bot, update):
         headers={'Content-Type': 'application/json'},
         body=json_obj
     )
-
+    print(resp)
+    #print(content)
 
 zeus_bot.dispatcher.add_handler(MessageHandler(Filters.text, watchMessages))
 
